@@ -3,7 +3,7 @@ import numpy as np
 import sys
 from src.exception import CustomException
 from src.components.data_ingestion import DataIngestion
-
+from src.components.data_transformation import DataTransformation
 
 
 #Data Ingestion
@@ -12,7 +12,9 @@ if __name__ == "__main__":
         #Data Ingestion
         obj = DataIngestion()
         train_data_path,test_data_path=obj.initiate_data_ingestion()
-
+        #Data transformation
+        data_transformation = DataTransformation()
+        train_arr,test_arr,_ = data_transformation.initaite_data_transformation(train_data_path,test_data_path)
         
     except Exception as e:
         raise CustomException(e,sys)
