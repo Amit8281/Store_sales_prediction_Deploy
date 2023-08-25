@@ -27,21 +27,13 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
         logging.info(f"\n{'*'*20} Feature Engneering Started {'*'*20}\n\n")
 
 
-    
-        
-    
-    # def distance_numpy(self,df,lat1, lon1, lat2, lon2):
-    #     p = np.pi/180
-    #     a = 0.5 - np.cos((df[lat2]-df[lat1])*p)/2 + np.cos(df[lat1]*p) * np.cos(df[lat2]*p) * (1-np.cos((df[lon2]-df[lon1])*p))/2
-    #     df['distance'] = 12742 * np.arcsin(np.sqrt(a))
-        
 
 
     def transform_data(self,df):
         try:
 
             df.drop(['Item_Identifier'],axis=1,inplace=True) 
-            logging.info("dropping the Id column")
+            logging.info("dropping the Item_Identifier column")
 
             logging.info("Convert 'LF' and 'low fat' to 'Low Fat'")
             df['Item_Fat_Content'].replace(['LF', 'low fat'], 'Low Fat', inplace=True)
@@ -49,9 +41,10 @@ class Feature_Engineering(BaseEstimator, TransformerMixin):
             logging.info("Convert 'reg' to 'Regular'")
             df['Item_Fat_Content'].replace('reg', 'Regular', inplace=True)
 
+            logging.info("deleting 'Item_Weight','Outlet_Size' because there are so many null values are present ")
             df.drop(['Item_Weight','Outlet_Size'],axis=1,inplace=True)
             
-            logging.info("now Item_Fat_Content is good")
+            logging.info("now we are good to go for Data Transformation")
 
             logging.info(f'Train Dataframe Head: \n{df.head().to_string()}')
 
@@ -107,7 +100,7 @@ class DataTransformation:
 
             # defining the categorical and numerical column
             categorical_column=['Item_Type']
-            ordinal_encod=['Outlet_Location_Type','Item_Fat_Content','Outlet_Type','Outlet_Identifier']
+            ordinal_encod=['Outlet_Location_Type','Outlet_Type','Item_Fat_Content','Outlet_Identifier']
             numerical_column=['Item_Visibility','Item_MRP','Outlet_Establishment_Year']
             
 
@@ -134,7 +127,7 @@ class DataTransformation:
             # ordinal pipeline
             ordianl_pipeline=Pipeline(steps=[
                 ('impute',SimpleImputer(strategy='most_frequent')),
-                ('ordinal',OrdinalEncoder(categories=['Outlet_Location_Type','Outlet_Type','Outlet_Identifier','Item_Fat_Content'])),
+                ('ordinal', OrdinalEncoder(categories=[Outlet_Location_Type, Outlet_Type, Outlet_Identifier, Item_Fat_Content], handle_unknown='use_encoded_value', unknown_value=-1)),
                 ('scaler',StandardScaler(with_mean=False))   
                 ])
             
@@ -144,14 +137,14 @@ class DataTransformation:
                 ('numerical_pipeline',numerical_pipeline,numerical_column),
                 ('categorical_pipeline',categorical_pipeline,categorical_column),
                 ('ordianl_pipeline',ordianl_pipeline,ordinal_encod)
-                ])
+                ],remainder='passthrough')
 
 
             # returning preprocessor
 
             return preprocessor
         
-            logging.info(f'Pipeline Completed')
+            logging.info('Pipeline Completed')
 
         except Exception as e:
             logging.info("error in data transformation")
@@ -177,13 +170,6 @@ class DataTransformation:
             #logging.info(f'Train Dataframe Head : \n{train_df.head().to_string()}')
             #logging.info(f'Test Dataframe Head  : \n{test_df.head().to_string()}')
 
-
-            
-
-
-# adding delivery city
-            #train_df['Delivery_city']=train_df['Delivery_person_ID'].str.split('RES',expand=True)[0]
-            #test_df['Delivery_city']=test_df['Delivery_person_ID'].str.split('RES',expand=True)[0]
 
 
             logging.info('Obtaining preprocessing object')
