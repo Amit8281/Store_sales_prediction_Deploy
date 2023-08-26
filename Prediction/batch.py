@@ -67,7 +67,7 @@ class BatchPrediction:
             logging.info("Feature-engineered batch data saved as CSV.")
 
             # Dropping target column
-            df = df.drop('Item_Outlet_Sales', axis=1)
+            #df = df.drop('Item_Identifier',axis=1)
 
             logging.info(f"Columns before transformation: {', '.join(f'{col}: {df[col].dtype}' for col in df.columns)}")
 
