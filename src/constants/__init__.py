@@ -29,10 +29,13 @@ TRAIN_DATA_DIR_KEY = 'train.csv'
 TEST_DATA_DIR_KEY = 'test.csv'
 
 #Data Transformation Constants
-# data validation constants
 DATA_TRANSFORMATION_ARTIFACT = 'data_transformation'
 DATA_PREPROCESSED_DIR='preprocessed'
 DATA_TRANSFORMATION_PREPROCESSING_OBJ = 'preprocessor.pkl'
 DATA_TRANSFORMED_DIR = 'transformed_data'
 TRANSFORMED_TRAIN_DIR_KEY = 'train.csv'
 TRANSFORMED_TEST_DIR_KEY = 'test.csv'
+
+# Model Training Constant
+MODEL_TRAINER_KEY = 'model_trainer'
+MODEL_OBJECT = 'model.pkl'

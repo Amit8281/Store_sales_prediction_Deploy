@@ -38,5 +38,7 @@ FEATURE_ENG_OBJ_PATH = os.path.join(ROOT_DIR,ARTIFACT_DIR_KEY,
                                       DATA_TRANSFORMATION_ARTIFACT,DATA_PREPROCESSED_DIR,
                                       'feature_eng.pkl')
 
-
+#Model Training config
+MODEL_FILE_PATH = os.path.join(ROOT_DIR,ARTIFACT_DIR_KEY,
+                               MODEL_TRAINER_KEY,MODEL_OBJECT)
 
