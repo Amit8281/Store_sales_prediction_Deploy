@@ -41,7 +41,7 @@ MODEL_TRAINER_KEY = 'model_trainer'
 MODEL_OBJECT = 'model.pkl'
 
 #Batch Prediction
-PREDICTION_FOLDER='batch_Prediction'
-PREDICTION_CSV='prediction_csv'
-PREDICTION_FILE='prediction.csv'
-FEATURE_ENG_FOLDER='feature_eng'
+# PREDICTION_FOLDER='batch_Prediction'
+# PREDICTION_CSV='prediction_csv'
+# PREDICTION_FILE='prediction.csv'
+# FEATURE_ENG_FOLDER='feature_eng'

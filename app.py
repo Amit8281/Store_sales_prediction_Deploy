@@ -6,7 +6,7 @@ from src.pipeline.prediction_pipeline import CustomData, PredictPipeline
 import os
 from werkzeug.utils import secure_filename
 
-from Prediction.batch import batch_prediction
+from Prediction.batch import BatchPrediction
 from src.logger import logging
 from src.components.data_transformation import DataTransformationConfig
 from src.config.configuration import *
@@ -89,7 +89,7 @@ def perform_batch_prediction():
             logging.info("CSV received and Uploaded")
 
             # Perform batch prediction using the uploaded file
-            batch = batch_prediction(file_path,
+            batch = BatchPrediction(file_path,
                                     model_file_path,
                                     transformer_file_path,
                                     feature_engineering_file_path)
