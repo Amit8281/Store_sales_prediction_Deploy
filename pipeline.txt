@@ -14,3 +14,6 @@
 2.after creating variable we will connect in config file
 3.after completing both steps we will start our Model Training pipeline 
 4.if required we will use utils function
+
+#Training pipeline
+1. define training pipeline in pipeline folder for train model
