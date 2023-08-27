@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 Artifact/
 Artifact/*
-batch_prediction/
-batch_prediction/*
+# batch_prediction/
+# batch_prediction/*
