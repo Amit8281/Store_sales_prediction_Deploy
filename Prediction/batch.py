@@ -10,15 +10,7 @@ from src.utils import load_model
 from sklearn.pipeline import Pipeline
 
 
-PREDICTION_FOLDER='batch_Prediction'
-PREDICTION_CSV='prediction_csv'
-PREDICTION_FILE='prediction.csv'
 
-FEATURE_ENG_FOLDER='feature_eng'
-
-ROOT_DIR=os.getcwd()
-FEATURE_ENG=os.path.join(ROOT_DIR,PREDICTION_FOLDER,FEATURE_ENG_FOLDER)
-BATCH_PREDICTION=os.path.join(ROOT_DIR,PREDICTION_FOLDER,PREDICTION_CSV)
 
 class BatchPrediction:
     def __init__(self, input_file_path, model_file_path, transformer_file_path, feature_engineering_file_path):
@@ -60,7 +52,7 @@ class BatchPrediction:
             df = feature_engineering_pipeline.transform(df)
 
             # Save the feature-engineered data as a CSV file
-            feature_eng_path = os.path.join(PREDICTION_FOLDER, FEATURE_ENG_FOLDER)
+            feature_eng_path = os.path.join(FEATURE_ENG)
             os.makedirs(feature_eng_path, exist_ok=True)
             feature_eng_file_path = os.path.join(feature_eng_path, 'batch_feature_engineered.csv')
             df.to_csv(feature_eng_file_path, index=False)
@@ -82,7 +74,7 @@ class BatchPrediction:
             df_predictions = pd.DataFrame(predictions, columns=['prediction'])
 
             # Save the predictions to a CSV file
-            batch_prediction_path = os.path.join(PREDICTION_FOLDER, PREDICTION_CSV, PREDICTION_FILE)
+            batch_prediction_path = os.path.join(BATCH_PREDICTION)
             os.makedirs(os.path.dirname(batch_prediction_path), exist_ok=True)
             df_predictions.to_csv(batch_prediction_path, index=False)
             logging.info(f"Batch predictions saved to '{batch_prediction_path}'.")
